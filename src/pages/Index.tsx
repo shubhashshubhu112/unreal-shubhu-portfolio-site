@@ -2,130 +2,128 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { ArrowDown } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Download, ArrowRight, Code, Palette, Zap } from "lucide-react";
 
 const Index = () => {
-  const handleResumeDownload = () => {
-    // Placeholder for resume download functionality
-    console.log("Resume download initiated");
-    // You can replace this with actual resume file link
-    window.open("https://drive.google.com/file/d/your-resume-file-id/view", "_blank");
-  };
-
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50">
       <Navigation />
       
       {/* Hero Section */}
       <section className="pt-24 pb-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="mb-8">
-            <img
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face"
-              alt="Shubhash Nath Thakur"
-              className="w-32 h-32 rounded-full mx-auto mb-6 shadow-lg object-cover"
-            />
-          </div>
-          
-          <h1 className="text-5xl md:text-6xl font-light text-gray-900 mb-6 animate-fade-in">
-            Shubhash Nath Thakur
-          </h1>
-          
-          <p className="text-xl md:text-2xl text-gray-600 mb-8 font-light">
-            Technical Artist | Unreal Engine Specialist
-          </p>
-          
-          <p className="text-lg text-gray-700 mb-12 max-w-2xl mx-auto leading-relaxed">
-            Crafting immersive digital experiences through innovative technical artistry, 
-            specializing in Unreal Engine development, procedural generation, and performance optimization.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button
-              onClick={handleResumeDownload}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-all duration-200 hover:scale-105"
-            >
-              Download Resume
-            </Button>
-            
-            <Button
-              variant="outline"
-              className="border-gray-300 text-gray-700 hover:bg-gray-50 px-8 py-3 rounded-lg font-medium transition-all duration-200"
-              onClick={() => document.getElementById('about-preview')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              Learn More
-              <ArrowDown className="ml-2 h-4 w-4" />
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* About Preview Section */}
-      <section id="about-preview" className="py-16 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl font-light text-gray-900 mb-6">About Me</h2>
-              <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                As a passionate Technical Artist and Level Designer, I bridge the gap between 
-                creative vision and technical implementation. With expertise in Unreal Engine 5.5+, 
-                I specialize in creating optimized, visually stunning game environments and systems.
-              </p>
-              <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-                My experience spans from MergeXR Studios to independent projects, where I've 
-                developed advanced shader systems, procedural generation tools, and performance 
-                optimization solutions for AR/VR and traditional gaming platforms.
-              </p>
-              <Button 
-                variant="outline"
-                className="border-blue-600 text-blue-600 hover:bg-blue-50"
-                onClick={() => window.location.href = '/about'}
-              >
-                Read Full Story
-              </Button>
+            <div className="text-left space-y-8 animate-fade-in">
+              <div className="space-y-4">
+                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-light text-gray-900 leading-tight">
+                  <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                    Technical
+                  </span>
+                  <br />
+                  Artist
+                </h1>
+                <p className="text-xl text-gray-600 max-w-lg leading-relaxed">
+                  Crafting immersive experiences through cutting-edge technology, 
+                  procedural systems, and optimized performance in Unreal Engine.
+                </p>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button 
+                  size="lg" 
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg group"
+                >
+                  <Download className="w-5 h-5 mr-2 group-hover:animate-bounce" />
+                  Download Resume
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="lg"
+                  className="px-8 py-4 rounded-full border-2 hover:bg-gray-50 transition-all duration-300 hover:scale-105 group"
+                >
+                  View Portfolio
+                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </div>
             </div>
             
-            <div className="relative">
-              <img
-                src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&h=400&fit=crop"
-                alt="Technical Artist at work"
-                className="rounded-lg shadow-xl w-full h-auto"
-              />
+            <div className="relative animate-fade-in" style={{ animationDelay: '0.2s' }}>
+              <div className="relative w-80 h-80 mx-auto">
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full blur-3xl opacity-20 animate-pulse"></div>
+                <div className="relative w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 rounded-full overflow-hidden border-4 border-white shadow-2xl">
+                  <div className="w-full h-full bg-gray-300 flex items-center justify-center text-gray-500">
+                    <span className="text-lg font-medium">Profile Photo</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Skills Highlights */}
-      <section className="py-16">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-light text-gray-900 text-center mb-12">Core Expertise</h2>
-          
+      {/* Skills Preview */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white/70 backdrop-blur-sm">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-light text-center text-gray-900 mb-12">Core Expertise</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center p-6 rounded-lg hover:bg-gray-50 transition-colors">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">🎮</span>
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Game Development</h3>
-              <p className="text-gray-600">Unreal Engine 5.5+, Blueprints, Gameplay Systems, Level Design</p>
-            </div>
-            
-            <div className="text-center p-6 rounded-lg hover:bg-gray-50 transition-colors">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">⚡</span>
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Performance Optimization</h3>
-              <p className="text-gray-600">Rendering Pipeline, LOD Systems, Memory Management</p>
-            </div>
-            
-            <div className="text-center p-6 rounded-lg hover:bg-gray-50 transition-colors">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">🎨</span>
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Technical Art</h3>
-              <p className="text-gray-600">Shaders, Procedural Generation, VFX, Material Editor</p>
-            </div>
+            <Card className="group hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border-0 bg-white/80 backdrop-blur-sm">
+              <CardContent className="p-8 text-center">
+                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-200 transition-colors">
+                  <Code className="w-8 h-8 text-blue-600" />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">Unreal Engine</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Expert in UE5+ development, Blueprints, and gameplay systems with focus on performance optimization.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="group hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border-0 bg-white/80 backdrop-blur-sm" style={{ animationDelay: '0.1s' }}>
+              <CardContent className="p-8 text-center">
+                <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-200 transition-colors">
+                  <Palette className="w-8 h-8 text-purple-600" />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">Procedural Art</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Creating dynamic environments through procedural generation, materials, and advanced shader work.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="group hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border-0 bg-white/80 backdrop-blur-sm" style={{ animationDelay: '0.2s' }}>
+              <CardContent className="p-8 text-center">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-green-200 transition-colors">
+                  <Zap className="w-8 h-8 text-green-600" />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">Performance</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Optimizing rendering pipelines, memory usage, and frame rates for high-quality real-time experiences.
+                </p>
+              </CardContent>
+            </Card>
           </div>
+        </div>
+      </section>
+
+      {/* Bio Section */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl font-light text-gray-900 mb-8">About Me</h2>
+          <p className="text-lg text-gray-600 leading-relaxed mb-8">
+            I'm a passionate Technical Artist and Level Designer with expertise in Unreal Engine, 
+            procedural generation, and performance optimization. I bridge the gap between creative 
+            vision and technical implementation, creating tools and systems that empower artists 
+            while maintaining optimal performance.
+          </p>
+          <Button 
+            variant="outline" 
+            size="lg"
+            className="rounded-full px-8 py-4 hover:bg-gray-50 transition-all duration-300 hover:scale-105"
+          >
+            Learn More About Me
+            <ArrowRight className="w-5 h-5 ml-2" />
+          </Button>
         </div>
       </section>
 

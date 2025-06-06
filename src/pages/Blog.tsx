@@ -1,199 +1,251 @@
 
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Calendar, User, ArrowRight } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Calendar, Clock, Search, ArrowRight, Bookmark } from "lucide-react";
 
 const Blog = () => {
-  // Mock blog data - In a real application, this would come from a CMS
   const blogPosts = [
     {
       id: 1,
       title: "Optimizing Unreal Engine 5 for Mobile AR Applications",
-      excerpt: "Learn advanced techniques for maintaining 60fps performance in mobile AR experiences while preserving visual quality.",
-      content: "Detailed guide on mobile optimization strategies...",
-      author: "Shubhash Nath Thakur",
+      excerpt: "Deep dive into performance optimization techniques for mobile AR development, covering rendering pipelines, memory management, and platform-specific optimizations.",
+      category: "Optimization",
       date: "2024-12-15",
-      tags: ["Unreal Engine", "Mobile", "AR", "Optimization"],
-      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=600&h=300&fit=crop",
-      readTime: "8 min read"
+      readTime: "8 min read",
+      featured: true,
+      tags: ["Unreal Engine", "Mobile", "AR", "Performance"]
     },
     {
       id: 2,
-      title: "Procedural Landscape Generation: Advanced Techniques",
-      excerpt: "Exploring algorithmic approaches to creating diverse, realistic terrain systems that scale efficiently.",
-      content: "In-depth tutorial on procedural generation...",
-      author: "Shubhash Nath Thakur",
+      title: "Procedural Landscape Generation with PCG Framework",
+      excerpt: "Exploring the new Procedural Content Generation framework in UE5 for creating dynamic, scalable landscape systems.",
+      category: "Technical Art",
       date: "2024-12-08",
-      tags: ["Procedural Generation", "Landscapes", "Technical Art"],
-      image: "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=600&h=300&fit=crop",
-      readTime: "12 min read"
+      readTime: "12 min read",
+      tags: ["PCG", "Procedural", "Landscapes", "UE5"]
     },
     {
       id: 3,
-      title: "Shader Optimization: From Concept to Implementation",
-      excerpt: "A comprehensive guide to writing efficient shaders that balance visual impact with performance constraints.",
-      content: "Step-by-step shader optimization process...",
-      author: "Shubhash Nath Thakur",
-      date: "2024-11-28",
-      tags: ["Shaders", "HLSL", "Performance", "Graphics"],
-      image: "https://images.unsplash.com/photo-1483058712412-4245e9b90334?w=600&h=300&fit=crop",
-      readTime: "10 min read"
+      title: "Advanced Shader Techniques for Stylized Rendering",
+      excerpt: "Creating custom shaders for non-photorealistic rendering, including toon shading, rim lighting, and artistic effects.",
+      category: "Shaders",
+      date: "2024-12-01",
+      readTime: "15 min read",
+      tags: ["Shaders", "HLSL", "NPR", "Materials"]
     },
     {
       id: 4,
-      title: "Building Scalable Asset Pipelines for Game Development",
-      excerpt: "Streamlining content creation workflows for large-scale projects with automated tools and processes.",
-      content: "Pipeline development best practices...",
-      author: "Shubhash Nath Thakur",
-      date: "2024-11-20",
-      tags: ["Pipeline", "Automation", "Workflow", "Tools"],
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=300&fit=crop",
-      readTime: "15 min read"
+      title: "Building Efficient Asset Pipelines for Large Projects",
+      excerpt: "Streamlining content creation workflows with automation tools, version control strategies, and team collaboration best practices.",
+      category: "Pipeline",
+      date: "2024-11-25",
+      readTime: "10 min read",
+      tags: ["Pipeline", "Automation", "Workflow", "Tools"]
+    },
+    {
+      id: 5,
+      title: "Niagara VFX: From Concept to Implementation",
+      excerpt: "Step-by-step guide to creating compelling visual effects using Unreal Engine's Niagara particle system.",
+      category: "VFX",
+      date: "2024-11-18",
+      readTime: "14 min read",
+      tags: ["Niagara", "VFX", "Particles", "Real-time"]
+    },
+    {
+      id: 6,
+      title: "Level Design Psychology: Guiding Player Behavior",
+      excerpt: "Understanding how environmental design influences player decisions and creating intuitive level flow through visual communication.",
+      category: "Level Design",
+      date: "2024-11-10",
+      readTime: "11 min read",
+      tags: ["Level Design", "Psychology", "Player Flow", "UX"]
     }
   ];
 
-  const categories = ["All", "Technical Art", "Optimization", "Tutorials", "Pipeline", "AR/VR"];
+  const categories = ["All", "Technical Art", "Optimization", "Shaders", "VFX", "Level Design", "Pipeline"];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50">
       <Navigation />
       
-      <section className="pt-24 pb-16 px-4 sm:px-6 lg:px-8">
+      <div className="pt-24 pb-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-light text-gray-900 mb-6">Blog</h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Insights, tutorials, and thoughts on technical artistry and game development
+          {/* Header */}
+          <div className="text-center mb-16 animate-fade-in">
+            <h1 className="text-5xl font-light text-gray-900 mb-6">
+              Technical <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Blog</span>
+            </h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
+              Insights, tutorials, and thoughts on technical art, game development, 
+              and real-time graphics from the trenches of production.
             </p>
-          </div>
-
-          {/* Category Filter */}
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
-            {categories.map((category) => (
-              <Button
-                key={category}
-                variant={category === "All" ? "default" : "outline"}
-                className={`px-6 py-2 rounded-full transition-all duration-200 ${
-                  category === "All" 
-                    ? "bg-blue-600 text-white hover:bg-blue-700" 
-                    : "border-gray-300 text-gray-700 hover:bg-gray-50"
-                }`}
-              >
-                {category}
-              </Button>
-            ))}
+            
+            {/* Search and Filters */}
+            <div className="flex flex-col md:flex-row gap-4 justify-center items-center max-w-2xl mx-auto">
+              <div className="relative flex-1 w-full">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <Input
+                  placeholder="Search articles..."
+                  className="pl-10 py-3 rounded-full border-2 focus:border-blue-300"
+                />
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {categories.slice(0, 4).map((category) => (
+                  <Badge 
+                    key={category}
+                    variant="outline"
+                    className="cursor-pointer hover:bg-blue-50 hover:border-blue-300 transition-colors px-4 py-2"
+                  >
+                    {category}
+                  </Badge>
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* Featured Post */}
-          {blogPosts.length > 0 && (
-            <div className="mb-16">
-              <h2 className="text-2xl font-semibold text-gray-900 mb-6">Featured Post</h2>
-              <Card className="border-0 shadow-xl overflow-hidden">
-                <div className="grid grid-cols-1 lg:grid-cols-2">
-                  <img
-                    src={blogPosts[0].image}
-                    alt={blogPosts[0].title}
-                    className="w-full h-64 lg:h-full object-cover"
-                  />
-                  <div className="p-8 flex flex-col justify-center">
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {blogPosts[0].tags.slice(0, 3).map((tag) => (
-                        <Badge key={tag} variant="secondary" className="text-xs">
+          {blogPosts.filter(post => post.featured).map((post) => (
+            <Card key={post.id} className="mb-16 border-0 shadow-2xl bg-white/80 backdrop-blur-sm overflow-hidden animate-fade-in">
+              <div className="grid grid-cols-1 lg:grid-cols-2">
+                <div className="relative h-64 lg:h-full bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100">
+                  <div className="absolute inset-0 flex items-center justify-center text-gray-500">
+                    <div className="text-center">
+                      <Bookmark className="w-16 h-16 mx-auto mb-4" />
+                      <span className="text-lg font-medium">Featured Article</span>
+                    </div>
+                  </div>
+                  <Badge className="absolute top-4 left-4 bg-blue-600 text-white">Featured</Badge>
+                </div>
+                <CardContent className="p-8 lg:p-12">
+                  <div className="space-y-6">
+                    <div>
+                      <Badge className="mb-4 bg-blue-100 text-blue-800">{post.category}</Badge>
+                      <h2 className="text-3xl font-semibold text-gray-900 mb-4 leading-tight">{post.title}</h2>
+                      <p className="text-gray-600 leading-relaxed text-lg">{post.excerpt}</p>
+                    </div>
+                    
+                    <div className="flex items-center gap-6 text-sm text-gray-500">
+                      <div className="flex items-center gap-2">
+                        <Calendar className="w-4 h-4" />
+                        <span>{post.date}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Clock className="w-4 h-4" />
+                        <span>{post.readTime}</span>
+                      </div>
+                    </div>
+                    
+                    <div className="flex flex-wrap gap-2">
+                      {post.tags.map((tag) => (
+                        <Badge key={tag} variant="secondary" className="bg-gray-100 text-gray-700">
                           {tag}
                         </Badge>
                       ))}
                     </div>
-                    <h3 className="text-2xl font-semibold text-gray-900 mb-3">
-                      {blogPosts[0].title}
-                    </h3>
-                    <p className="text-gray-600 mb-4 leading-relaxed">
-                      {blogPosts[0].excerpt}
-                    </p>
-                    <div className="flex items-center gap-4 text-sm text-gray-500 mb-6">
-                      <span className="flex items-center gap-1">
-                        <Calendar className="w-4 h-4" />
-                        {new Date(blogPosts[0].date).toLocaleDateString()}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <User className="w-4 h-4" />
-                        {blogPosts[0].author}
-                      </span>
-                      <span>{blogPosts[0].readTime}</span>
-                    </div>
-                    <Button className="w-fit bg-blue-600 hover:bg-blue-700 text-white">
+                    
+                    <Button className="bg-blue-600 hover:bg-blue-700 text-white rounded-full px-6 group">
                       Read Full Article
-                      <ArrowRight className="w-4 h-4 ml-2" />
+                      <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                     </Button>
                   </div>
-                </div>
-              </Card>
-            </div>
-          )}
+                </CardContent>
+              </div>
+            </Card>
+          ))}
 
           {/* Blog Posts Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPosts.slice(1).map((post) => (
-              <Card key={post.id} className="group border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden">
-                <div className="relative overflow-hidden">
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
+            {blogPosts.filter(post => !post.featured).map((post, index) => (
+              <Card 
+                key={post.id}
+                className="group border-0 shadow-xl bg-white/80 backdrop-blur-sm overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 animate-fade-in"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div className="relative h-48 bg-gradient-to-br from-gray-100 via-blue-50 to-purple-50 overflow-hidden">
+                  <div className="absolute inset-0 flex items-center justify-center text-gray-400 group-hover:scale-110 transition-transform duration-500">
+                    <Bookmark className="w-12 h-12" />
+                  </div>
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300"></div>
+                  <Badge className="absolute top-4 left-4 bg-white/90 text-gray-700 border-0">
+                    {post.category}
+                  </Badge>
                 </div>
                 
-                <CardHeader>
-                  <div className="flex flex-wrap gap-2 mb-3">
-                    {post.tags.slice(0, 2).map((tag) => (
-                      <Badge key={tag} variant="outline" className="text-xs">
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-                  <CardTitle className="text-lg text-gray-900 group-hover:text-blue-600 transition-colors">
-                    {post.title}
-                  </CardTitle>
-                  <CardDescription className="text-gray-600 leading-relaxed">
-                    {post.excerpt}
-                  </CardDescription>
-                </CardHeader>
-                
-                <CardContent>
-                  <div className="flex items-center justify-between text-sm text-gray-500">
-                    <span className="flex items-center gap-1">
-                      <Calendar className="w-4 h-4" />
-                      {new Date(post.date).toLocaleDateString()}
-                    </span>
-                    <span>{post.readTime}</span>
+                <CardContent className="p-6">
+                  <div className="space-y-4">
+                    <div>
+                      <h3 className="text-xl font-semibold text-gray-900 group-hover:text-blue-600 transition-colors leading-tight mb-3">
+                        {post.title}
+                      </h3>
+                      <p className="text-gray-600 text-sm leading-relaxed">{post.excerpt}</p>
+                    </div>
+                    
+                    <div className="flex items-center justify-between text-xs text-gray-500">
+                      <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-1">
+                          <Calendar className="w-3 h-3" />
+                          <span>{post.date}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Clock className="w-3 h-3" />
+                          <span>{post.readTime}</span>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="flex flex-wrap gap-1">
+                      {post.tags.slice(0, 3).map((tag) => (
+                        <Badge key={tag} variant="secondary" className="text-xs bg-gray-100 text-gray-600">
+                          {tag}
+                        </Badge>
+                      ))}
+                    </div>
+                    
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="w-full rounded-full group-hover:bg-blue-50 group-hover:border-blue-200 transition-colors group"
+                    >
+                      Read More
+                      <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                    </Button>
                   </div>
                 </CardContent>
               </Card>
             ))}
           </div>
 
-          {/* CMS Note */}
-          <div className="mt-16 text-center">
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 max-w-2xl mx-auto">
-              <h3 className="text-lg font-semibold text-blue-900 mb-2">Blog Management</h3>
-              <p className="text-blue-700 text-sm mb-4">
-                This blog is powered by a content management system. 
-                Articles can be easily created, edited, or published through the admin dashboard.
-              </p>
-              <Button 
-                variant="outline" 
-                size="sm"
-                className="border-blue-600 text-blue-600 hover:bg-blue-50"
-                onClick={() => window.location.href = '/admin-login'}
-              >
-                Admin Access
-              </Button>
-            </div>
+          {/* Newsletter Signup */}
+          <div className="mt-16 animate-fade-in" style={{ animationDelay: '0.6s' }}>
+            <Card className="border-0 shadow-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+              <CardContent className="p-12 text-center">
+                <h2 className="text-3xl font-light mb-4">Stay Updated</h2>
+                <p className="text-blue-100 mb-8 max-w-2xl mx-auto">
+                  Get the latest articles, tutorials, and insights delivered straight to your inbox. 
+                  No spam, just valuable content for technical artists and developers.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                  <Input
+                    placeholder="Enter your email"
+                    className="flex-1 bg-white/10 border-white/20 text-white placeholder:text-white/70 rounded-full"
+                  />
+                  <Button 
+                    size="lg" 
+                    variant="secondary"
+                    className="bg-white text-blue-600 hover:bg-gray-50 rounded-full px-8 hover:scale-105 transition-all duration-300"
+                  >
+                    Subscribe
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
-      </section>
+      </div>
 
       <Footer />
     </div>

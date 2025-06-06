@@ -1,7 +1,7 @@
 
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Settings } from "lucide-react";
 
 const Navigation = () => {
   const location = useLocation();
@@ -19,34 +19,50 @@ const Navigation = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <nav className="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-md border-b border-gray-100 z-50">
+    <nav className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-md border-b border-gray-100 z-50 transition-all duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <Link to="/" className="text-xl font-semibold text-gray-900 hover:text-blue-600 transition-colors">
-            Shubhash Nath Thakur
+          <Link 
+            to="/" 
+            className="text-xl font-semibold text-gray-900 hover:text-blue-600 transition-colors duration-300 group"
+          >
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent group-hover:from-purple-600 group-hover:to-blue-600 transition-all duration-300">
+              Shubhash Nath Thakur
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex items-center space-x-1">
             {navItems.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
-                className={`relative px-3 py-2 text-sm font-medium transition-colors hover:text-blue-600 ${
-                  isActive(item.path) ? "text-blue-600" : "text-gray-700"
+                className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 rounded-full hover:bg-gray-50 ${
+                  isActive(item.path) 
+                    ? "text-blue-600 bg-blue-50" 
+                    : "text-gray-700 hover:text-blue-600"
                 }`}
               >
                 {item.label}
                 {isActive(item.path) && (
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 rounded-full" />
+                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-blue-600 rounded-full" />
                 )}
               </Link>
             ))}
+            
+            {/* Admin Link */}
+            <Link
+              to="/admin-login"
+              className="ml-4 p-2 text-gray-400 hover:text-blue-600 transition-colors duration-300 rounded-full hover:bg-gray-50"
+              title="Admin Portal"
+            >
+              <Settings className="w-4 h-4" />
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2"
+            className="md:hidden p-2 rounded-lg hover:bg-gray-50 transition-colors duration-300"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -55,20 +71,32 @@ const Navigation = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden absolute top-16 left-0 right-0 bg-white/95 backdrop-blur-md border-b border-gray-100">
-            <div className="px-4 py-2 space-y-1">
+          <div className="md:hidden absolute top-16 left-0 right-0 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-lg">
+            <div className="px-4 py-4 space-y-2">
               {navItems.map((item) => (
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={`block px-3 py-2 text-base font-medium transition-colors hover:text-blue-600 ${
-                    isActive(item.path) ? "text-blue-600" : "text-gray-700"
+                  className={`block px-4 py-3 text-base font-medium transition-colors duration-300 rounded-lg ${
+                    isActive(item.path) 
+                      ? "text-blue-600 bg-blue-50" 
+                      : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
                   }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.label}
                 </Link>
               ))}
+              <Link
+                to="/admin-login"
+                className="block px-4 py-3 text-base font-medium text-gray-400 hover:text-blue-600 hover:bg-gray-50 transition-colors duration-300 rounded-lg"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <div className="flex items-center gap-2">
+                  <Settings className="w-4 h-4" />
+                  Admin Portal
+                </div>
+              </Link>
             </div>
           </div>
         )}

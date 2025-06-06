@@ -1,154 +1,191 @@
 
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Play } from "lucide-react";
+import { ExternalLink, Play, Github } from "lucide-react";
 
 const Portfolio = () => {
-  // Mock portfolio data - In a real application, this would come from a CMS
   const projects = [
     {
       id: 1,
       title: "Procedural Landscape System",
-      description: "Advanced terrain generation system with real-time LOD optimization for large-scale environments in Unreal Engine 5.",
-      technologies: ["Unreal Engine 5", "Blueprints", "Material Editor", "Landscape"],
-      image: "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=600&h=400&fit=crop",
-      demoLink: "https://drive.google.com/your-demo-link",
-      category: "Technical Art"
+      description: "Advanced procedural terrain generation system with real-time foliage placement, weather dynamics, and optimized LOD management for large-scale environments.",
+      technologies: ["Unreal Engine 5", "Blueprints", "Procedural Generation", "Optimization"],
+      image: "/placeholder.svg",
+      category: "Technical Art",
+      featured: true
     },
     {
       id: 2,
       title: "AR Visualization Platform",
-      description: "Interactive AR application for architectural visualization with real-time material swapping and lighting adjustment.",
-      technologies: ["Unreal Engine", "AR Foundation", "Mobile Optimization", "Niagara VFX"],
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop",
-      demoLink: "https://www.artstation.com/your-project",
+      description: "Interactive AR application for architectural visualization with real-time lighting, material switching, and cross-platform deployment.",
+      technologies: ["Unreal Engine", "AR Foundation", "Mobile Optimization", "UI/UX"],
+      image: "/placeholder.svg",
       category: "AR/VR"
     },
     {
       id: 3,
       title: "Performance Optimization Suite",
-      description: "Comprehensive toolkit for monitoring and optimizing game performance across different platforms and hardware configurations.",
-      technologies: ["Python", "Unreal Engine", "Performance Analysis", "Automation"],
-      image: "https://images.unsplash.com/photo-1483058712412-4245e9b90334?w=600&h=400&fit=crop",
-      demoLink: "https://github.com/your-repo",
-      category: "Tools"
+      description: "Comprehensive optimization tools and workflows for reducing draw calls, memory usage, and improving frame rates across multiple platforms.",
+      technologies: ["Unreal Engine", "Performance Analysis", "Memory Optimization", "Profiling"],
+      image: "/placeholder.svg",
+      category: "Optimization"
     },
     {
       id: 4,
-      title: "Dynamic Shader Library",
-      description: "Collection of optimized shaders for various visual effects including water simulation, particle systems, and atmospheric effects.",
-      technologies: ["HLSL", "Material Editor", "Shader Optimization", "VFX"],
-      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=600&h=400&fit=crop",
-      demoLink: "https://drive.google.com/your-shader-library",
+      title: "Shader Collection",
+      description: "Custom shader library featuring advanced materials, special effects, and procedural textures for various artistic styles.",
+      technologies: ["HLSL", "Material Editor", "Procedural Textures", "VFX"],
+      image: "/placeholder.svg",
       category: "Shaders"
+    },
+    {
+      id: 5,
+      title: "Level Design Portfolio",
+      description: "Collection of immersive level designs showcasing gameplay flow, environmental storytelling, and player guidance techniques.",
+      technologies: ["Level Design", "Environmental Art", "Lighting", "Gameplay Flow"],
+      image: "/placeholder.svg",
+      category: "Level Design"
+    },
+    {
+      id: 6,
+      title: "Niagara VFX Systems",
+      description: "Dynamic particle systems and visual effects created with Niagara, including weather effects, magical spells, and environmental ambience.",
+      technologies: ["Niagara", "VFX", "Particle Systems", "Real-time Effects"],
+      image: "/placeholder.svg",
+      category: "VFX"
     }
   ];
 
-  const categories = ["All", "Technical Art", "AR/VR", "Tools", "Shaders"];
-
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50">
       <Navigation />
       
-      <section className="pt-24 pb-16 px-4 sm:px-6 lg:px-8">
+      <div className="pt-24 pb-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-light text-gray-900 mb-6">Portfolio</h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              A showcase of technical artistry and innovative solutions in game development
+          {/* Header */}
+          <div className="text-center mb-16 animate-fade-in">
+            <h1 className="text-5xl font-light text-gray-900 mb-6">
+              My <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Portfolio</span>
+            </h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              A showcase of technical artistry, innovative solutions, and creative implementations 
+              in game development and real-time graphics.
             </p>
           </div>
 
-          {/* Category Filter */}
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
-            {categories.map((category) => (
-              <Button
-                key={category}
-                variant={category === "All" ? "default" : "outline"}
-                className={`px-6 py-2 rounded-full transition-all duration-200 ${
-                  category === "All" 
-                    ? "bg-blue-600 text-white hover:bg-blue-700" 
-                    : "border-gray-300 text-gray-700 hover:bg-gray-50"
-                }`}
-              >
-                {category}
-              </Button>
-            ))}
-          </div>
-
-          {/* Portfolio Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-            {projects.map((project) => (
-              <Card key={project.id} className="group overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                <div className="relative overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
-                    <Button
-                      variant="secondary"
-                      size="sm"
-                      className="opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    >
-                      <Play className="w-4 h-4 mr-2" />
-                      View Demo
-                    </Button>
+          {/* Featured Project */}
+          {projects.filter(p => p.featured).map((project, index) => (
+            <Card key={project.id} className="mb-16 border-0 shadow-2xl bg-white/80 backdrop-blur-sm overflow-hidden animate-fade-in">
+              <div className="grid grid-cols-1 lg:grid-cols-2">
+                <div className="relative h-64 lg:h-full bg-gradient-to-br from-blue-100 to-purple-100">
+                  <div className="absolute inset-0 flex items-center justify-center text-gray-500">
+                    <Play className="w-16 h-16" />
                   </div>
+                  <Badge className="absolute top-4 left-4 bg-blue-600 text-white">Featured</Badge>
+                </div>
+                <CardContent className="p-8 lg:p-12">
+                  <div className="space-y-6">
+                    <div>
+                      <h2 className="text-3xl font-semibold text-gray-900 mb-4">{project.title}</h2>
+                      <p className="text-gray-600 leading-relaxed text-lg">{project.description}</p>
+                    </div>
+                    
+                    <div className="flex flex-wrap gap-2">
+                      {project.technologies.map((tech) => (
+                        <Badge key={tech} variant="secondary" className="bg-gray-100 text-gray-700 hover:bg-gray-200">
+                          {tech}
+                        </Badge>
+                      ))}
+                    </div>
+                    
+                    <div className="flex flex-wrap gap-4">
+                      <Button className="bg-blue-600 hover:bg-blue-700 text-white rounded-full px-6 group">
+                        <ExternalLink className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" />
+                        View Project
+                      </Button>
+                      <Button variant="outline" className="rounded-full px-6 hover:bg-gray-50 group">
+                        <Github className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" />
+                        Source Code
+                      </Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </div>
+            </Card>
+          ))}
+
+          {/* Projects Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {projects.filter(p => !p.featured).map((project, index) => (
+              <Card key={project.id} className="group border-0 shadow-xl bg-white/80 backdrop-blur-sm overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
+                <div className="relative h-48 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden">
+                  <div className="absolute inset-0 flex items-center justify-center text-gray-500 group-hover:scale-110 transition-transform duration-500">
+                    <Play className="w-12 h-12" />
+                  </div>
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
                 </div>
                 
-                <CardHeader>
-                  <div className="flex items-start justify-between">
+                <CardContent className="p-6">
+                  <div className="space-y-4">
                     <div>
-                      <CardTitle className="text-xl text-gray-900 mb-2">{project.title}</CardTitle>
-                      <Badge variant="secondary" className="mb-3">{project.category}</Badge>
+                      <Badge className="mb-2 bg-blue-100 text-blue-800">{project.category}</Badge>
+                      <h3 className="text-xl font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
+                        {project.title}
+                      </h3>
+                      <p className="text-gray-600 text-sm leading-relaxed mt-2">{project.description}</p>
                     </div>
-                    <Button variant="ghost" size="sm" className="text-blue-600 hover:text-blue-700">
-                      <ExternalLink className="w-4 h-4" />
+                    
+                    <div className="flex flex-wrap gap-1">
+                      {project.technologies.slice(0, 3).map((tech) => (
+                        <Badge key={tech} variant="secondary" className="text-xs bg-gray-100 text-gray-600">
+                          {tech}
+                        </Badge>
+                      ))}
+                      {project.technologies.length > 3 && (
+                        <Badge variant="secondary" className="text-xs bg-gray-100 text-gray-600">
+                          +{project.technologies.length - 3}
+                        </Badge>
+                      )}
+                    </div>
+                    
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="w-full rounded-full group-hover:bg-blue-50 group-hover:border-blue-200 transition-colors"
+                    >
+                      View Details
+                      <ExternalLink className="w-4 h-4 ml-2" />
                     </Button>
-                  </div>
-                  <CardDescription className="text-gray-600 leading-relaxed">
-                    {project.description}
-                  </CardDescription>
-                </CardHeader>
-                
-                <CardContent>
-                  <div className="flex flex-wrap gap-2">
-                    {project.technologies.map((tech) => (
-                      <Badge key={tech} variant="outline" className="text-xs">
-                        {tech}
-                      </Badge>
-                    ))}
                   </div>
                 </CardContent>
               </Card>
             ))}
           </div>
 
-          {/* CMS Note */}
-          <div className="mt-16 text-center">
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 max-w-2xl mx-auto">
-              <h3 className="text-lg font-semibold text-blue-900 mb-2">Portfolio Management</h3>
-              <p className="text-blue-700 text-sm mb-4">
-                This portfolio is powered by a content management system. 
-                Projects can be easily added, edited, or removed through the admin dashboard.
-              </p>
-              <Button 
-                variant="outline" 
-                size="sm"
-                className="border-blue-600 text-blue-600 hover:bg-blue-50"
-                onClick={() => window.location.href = '/admin-login'}
-              >
-                Admin Access
-              </Button>
-            </div>
+          {/* CTA Section */}
+          <div className="text-center mt-16 animate-fade-in">
+            <Card className="border-0 shadow-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+              <CardContent className="p-12">
+                <h2 className="text-3xl font-light mb-4">Interested in Collaboration?</h2>
+                <p className="text-blue-100 mb-8 max-w-2xl mx-auto">
+                  I'm always excited to work on new projects and explore innovative solutions. 
+                  Let's create something amazing together.
+                </p>
+                <Button 
+                  size="lg" 
+                  variant="secondary"
+                  className="bg-white text-blue-600 hover:bg-gray-50 rounded-full px-8 py-4 hover:scale-105 transition-all duration-300"
+                >
+                  Get in Touch
+                </Button>
+              </CardContent>
+            </Card>
           </div>
         </div>
-      </section>
+      </div>
 
       <Footer />
     </div>
