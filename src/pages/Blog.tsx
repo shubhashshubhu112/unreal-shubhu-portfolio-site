@@ -1,4 +1,3 @@
-
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
@@ -6,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Calendar, Clock, Search, ArrowRight, Bookmark } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Blog = () => {
   const blogPosts = [
@@ -17,7 +17,8 @@ const Blog = () => {
       date: "2024-12-15",
       readTime: "8 min read",
       featured: true,
-      tags: ["Unreal Engine", "Mobile", "AR", "Performance"]
+      tags: ["Unreal Engine", "Mobile", "AR", "Performance"],
+      url: "https://www.artstation.com/shubhashn4"
     },
     {
       id: 2,
@@ -69,17 +70,17 @@ const Blog = () => {
   const categories = ["All", "Technical Art", "Optimization", "Shaders", "VFX", "Level Design", "Pipeline"];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-blue-50 dark:to-blue-950">
       <Navigation />
       
       <div className="pt-24 pb-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div className="text-center mb-16 animate-fade-in">
-            <h1 className="text-5xl font-light text-gray-900 mb-6">
+            <h1 className="text-5xl font-light text-foreground mb-6">
               Technical <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Blog</span>
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-8">
               Insights, tutorials, and thoughts on technical art, game development, 
               and real-time graphics from the trenches of production.
             </p>
@@ -87,7 +88,7 @@ const Blog = () => {
             {/* Search and Filters */}
             <div className="flex flex-col md:flex-row gap-4 justify-center items-center max-w-2xl mx-auto">
               <div className="relative flex-1 w-full">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
                 <Input
                   placeholder="Search articles..."
                   className="pl-10 py-3 rounded-full border-2 focus:border-blue-300"
@@ -98,7 +99,7 @@ const Blog = () => {
                   <Badge 
                     key={category}
                     variant="outline"
-                    className="cursor-pointer hover:bg-blue-50 hover:border-blue-300 transition-colors px-4 py-2"
+                    className="cursor-pointer hover:bg-blue-50 hover:border-blue-300 dark:hover:bg-blue-950 transition-colors px-4 py-2"
                   >
                     {category}
                   </Badge>
@@ -109,10 +110,10 @@ const Blog = () => {
 
           {/* Featured Post */}
           {blogPosts.filter(post => post.featured).map((post) => (
-            <Card key={post.id} className="mb-16 border-0 shadow-2xl bg-white/80 backdrop-blur-sm overflow-hidden animate-fade-in">
+            <Card key={post.id} className="mb-16 border-0 shadow-2xl bg-card/80 backdrop-blur-sm overflow-hidden animate-fade-in">
               <div className="grid grid-cols-1 lg:grid-cols-2">
-                <div className="relative h-64 lg:h-full bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100">
-                  <div className="absolute inset-0 flex items-center justify-center text-gray-500">
+                <div className="relative h-64 lg:h-full bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 dark:from-blue-900 dark:via-purple-900 dark:to-pink-900">
+                  <div className="absolute inset-0 flex items-center justify-center text-muted-foreground">
                     <div className="text-center">
                       <Bookmark className="w-16 h-16 mx-auto mb-4" />
                       <span className="text-lg font-medium">Featured Article</span>
@@ -123,12 +124,12 @@ const Blog = () => {
                 <CardContent className="p-8 lg:p-12">
                   <div className="space-y-6">
                     <div>
-                      <Badge className="mb-4 bg-blue-100 text-blue-800">{post.category}</Badge>
-                      <h2 className="text-3xl font-semibold text-gray-900 mb-4 leading-tight">{post.title}</h2>
-                      <p className="text-gray-600 leading-relaxed text-lg">{post.excerpt}</p>
+                      <Badge className="mb-4 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100">{post.category}</Badge>
+                      <h2 className="text-3xl font-semibold text-foreground mb-4 leading-tight">{post.title}</h2>
+                      <p className="text-muted-foreground leading-relaxed text-lg">{post.excerpt}</p>
                     </div>
                     
-                    <div className="flex items-center gap-6 text-sm text-gray-500">
+                    <div className="flex items-center gap-6 text-sm text-muted-foreground">
                       <div className="flex items-center gap-2">
                         <Calendar className="w-4 h-4" />
                         <span>{post.date}</span>
@@ -141,15 +142,17 @@ const Blog = () => {
                     
                     <div className="flex flex-wrap gap-2">
                       {post.tags.map((tag) => (
-                        <Badge key={tag} variant="secondary" className="bg-gray-100 text-gray-700">
+                        <Badge key={tag} variant="secondary" className="bg-secondary text-secondary-foreground">
                           {tag}
                         </Badge>
                       ))}
                     </div>
                     
-                    <Button className="bg-blue-600 hover:bg-blue-700 text-white rounded-full px-6 group">
-                      Read Full Article
-                      <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                    <Button asChild className="bg-blue-600 hover:bg-blue-700 text-white rounded-full px-6 group">
+                      <a href={post.url} target="_blank" rel="noopener noreferrer">
+                        Read Full Article
+                        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                      </a>
                     </Button>
                   </div>
                 </CardContent>
@@ -162,15 +165,15 @@ const Blog = () => {
             {blogPosts.filter(post => !post.featured).map((post, index) => (
               <Card 
                 key={post.id}
-                className="group border-0 shadow-xl bg-white/80 backdrop-blur-sm overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 animate-fade-in"
+                className="group border-0 shadow-xl bg-card/80 backdrop-blur-sm overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 animate-fade-in"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className="relative h-48 bg-gradient-to-br from-gray-100 via-blue-50 to-purple-50 overflow-hidden">
-                  <div className="absolute inset-0 flex items-center justify-center text-gray-400 group-hover:scale-110 transition-transform duration-500">
+                <div className="relative h-48 bg-gradient-to-br from-secondary via-blue-50 to-purple-50 dark:via-blue-950 dark:to-purple-950 overflow-hidden">
+                  <div className="absolute inset-0 flex items-center justify-center text-muted-foreground group-hover:scale-110 transition-transform duration-500">
                     <Bookmark className="w-12 h-12" />
                   </div>
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300"></div>
-                  <Badge className="absolute top-4 left-4 bg-white/90 text-gray-700 border-0">
+                  <Badge className="absolute top-4 left-4 bg-background/90 text-foreground border-0">
                     {post.category}
                   </Badge>
                 </div>
@@ -178,13 +181,13 @@ const Blog = () => {
                 <CardContent className="p-6">
                   <div className="space-y-4">
                     <div>
-                      <h3 className="text-xl font-semibold text-gray-900 group-hover:text-blue-600 transition-colors leading-tight mb-3">
+                      <h3 className="text-xl font-semibold text-foreground group-hover:text-blue-600 transition-colors leading-tight mb-3">
                         {post.title}
                       </h3>
-                      <p className="text-gray-600 text-sm leading-relaxed">{post.excerpt}</p>
+                      <p className="text-muted-foreground text-sm leading-relaxed">{post.excerpt}</p>
                     </div>
                     
-                    <div className="flex items-center justify-between text-xs text-gray-500">
+                    <div className="flex items-center justify-between text-xs text-muted-foreground">
                       <div className="flex items-center gap-4">
                         <div className="flex items-center gap-1">
                           <Calendar className="w-3 h-3" />
@@ -199,7 +202,7 @@ const Blog = () => {
                     
                     <div className="flex flex-wrap gap-1">
                       {post.tags.slice(0, 3).map((tag) => (
-                        <Badge key={tag} variant="secondary" className="text-xs bg-gray-100 text-gray-600">
+                        <Badge key={tag} variant="secondary" className="text-xs bg-secondary text-secondary-foreground">
                           {tag}
                         </Badge>
                       ))}
@@ -208,10 +211,13 @@ const Blog = () => {
                     <Button 
                       variant="outline" 
                       size="sm" 
-                      className="w-full rounded-full group-hover:bg-blue-50 group-hover:border-blue-200 transition-colors group"
+                      asChild
+                      className="w-full rounded-full group-hover:bg-blue-50 group-hover:border-blue-200 dark:group-hover:bg-blue-950 transition-colors group"
                     >
-                      Read More
-                      <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                      <a href="https://www.artstation.com/shubhashn4" target="_blank" rel="noopener noreferrer">
+                        Read More
+                        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                      </a>
                     </Button>
                   </div>
                 </CardContent>
